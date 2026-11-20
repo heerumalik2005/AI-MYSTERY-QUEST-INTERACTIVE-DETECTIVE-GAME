@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}AI Mystery Quest | Become the Detective{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="eyebrow-line"></span> THE TRUTH IS HIDDEN IN PLAIN SIGHT</div>
+    <h1>Every mystery<br>has a <em>pattern.</em></h1>
+    <p class="hero-lead">Step into the investigator's chair. Examine evidence, challenge alibis, solve intricate puzzles, and let your reasoning uncover the truth.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ url_for('dashboard') }}">Enter the investigation <span>↗</span></a>
+      <a class="btn btn-quiet" href="#how-it-works">How to play</a>
+    </div>
+    <div class="hero-stats"><div><strong>02+</strong><span>CASE FILES</span></div><div><strong>03</strong><span>SUSPECTS PER CASE</span></div><div><strong>01</strong><span>TRUTH TO FIND</span></div></div>
+  </div>
+  <div class="hero-art">
+    <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+    <div class="file-card"><div class="file-top"><span>CASE FILE / 001</span><span class="status-dot">● ACTIVE</span></div>
+      <div class="magnifier">⌕</div><div class="file-stamp">CLASSIFIED</div>
+      <div class="file-lines"><i></i><i></i><i></i></div><div class="file-bottom"><span>UNSOLVED<br><b>UNTIL NOW</b></span><span class="file-symbol">✦</span></div>
+    </div>
+    <div class="floating-note note-one">EVIDENCE<br><b>IS NEVER SILENT</b></div>
+    <div class="floating-note note-two">OBSERVE · CONNECT · SOLVE</div>
+  </div>
+</section>
+<section id="how-it-works" class="feature-section">
+  <div class="section-heading"><div class="eyebrow">YOUR INVESTIGATION TOOLKIT</div><h2>Think like a detective.</h2></div>
+  <div class="feature-grid">
+    <article class="feature-card"><span class="feature-icon">⌕</span><h3>Examine the scene</h3><p>Collect hidden clues and inspect the details that others overlook.</p></article>
+    <article class="feature-card"><span class="feature-icon">◈</span><h3>Question the story</h3><p>Compare suspect motives, statements, and alibis for contradictions.</p></article>
+    <article class="feature-card"><span class="feature-icon">✧</span><h3>Consult your AI partner</h3><p>Get contextual guidance and progressive hints when you need them.</p></article>
+  </div>
+</section>
+{% endblock %}

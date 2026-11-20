@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07111f">
+  <title>{% block title %}AI Mystery Quest{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">✦</span><span>AI MYSTERY <b>QUEST</b></span></a>
+    <nav><a href="{{ url_for('dashboard') }}">Dashboard</a><a href="{{ url_for('history') }}">Case history</a></nav>
+  </header>
+  <main class="page-wrap">
+    {% if demo_mode %}<div class="mode-banner"><span class="pulse"></span> DEMO MODE · Offline cases enabled — no Groq key detected</div>{% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer>AI MYSTERY QUEST <span>·</span> Every clue tells a story.</footer>
+</body>
+</html>

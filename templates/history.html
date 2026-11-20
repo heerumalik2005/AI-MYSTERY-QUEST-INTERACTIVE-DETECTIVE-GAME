@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Case History | AI Mystery Quest{% endblock %}
+{% block content %}
+<section class="page-heading"><div><div class="eyebrow">ARCHIVE / INVESTIGATION LOG</div><h1>Case <em>history.</em></h1><p>Your completed investigations, deductions, and detective score.</p></div><a class="btn btn-primary" href="{{ url_for('dashboard') }}">New investigation ↗</a></section>
+<section class="panel history-table-panel">
+{% if history %}<div class="history-table-wrap"><table><thead><tr><th>CASE FILE</th><th>YOUR ACCUSATION</th><th>OUTCOME</th><th>CLUES</th><th>SCORE</th><th>DATE</th></tr></thead><tbody>{% for item in history %}<tr><td><b>{{ item.case_title }}</b></td><td>{{ item.suspect }}</td><td><span class="outcome {% if item.correct %}outcome-win{% else %}outcome-loss{% endif %}">{{ "SOLVED" if item.correct else "UNSOLVED" }}</span></td><td>{{ item.clues_found }}</td><td class="table-score">{{ item.score }}</td><td>{{ item.solved_at[:10] }}</td></tr>{% endfor %}</tbody></table></div>
+{% else %}<div class="empty-state large-empty"><span>⌁</span><h2>Your archive is waiting.</h2><p>Complete your first investigation to see your results here.</p><a class="btn btn-primary" href="{{ url_for('dashboard') }}">Start a case ↗</a></div>{% endif %}
+</section>
+{% endblock %}

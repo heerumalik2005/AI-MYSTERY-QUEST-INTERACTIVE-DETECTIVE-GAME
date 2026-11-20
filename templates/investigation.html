@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ case.title }} | Investigation{% endblock %}
+{% block content %}
+<div class="case-header"><div><div class="eyebrow">ACTIVE CASE FILE · {{ case.difficulty|upper }}</div><h1>{{ case.title }}</h1><p class="case-location">⌖ {{ case.location }}</p></div><div class="score-chip"><span>YOUR SCORE</span><strong id="score-value">{{ game.score }}</strong></div></div>
+<div class="progress-wrap"><div class="progress-label"><span>INVESTIGATION PROGRESS</span><b id="progress-label">{{ progress }}%</b></div><div class="progress-track"><div id="progress-bar" style="width:{{ progress }}%"></div></div></div>
+<div class="investigation-layout">
+  <div class="main-column">
+    <section class="panel case-brief"><div class="panel-kicker">INCIDENT REPORT</div><p>{{ case.description }}</p></section>
+    <section class="panel"><div class="panel-title"><div><div class="panel-kicker">01 / PHYSICAL CLUES</div><h2>Evidence collection</h2></div><span class="count-pill" id="clue-count">{{ game.discovered|length }} / {{ case.evidence|length }} FOUND</span></div>
+      <div class="evidence-grid">{% for clue in case.evidence %}<article class="evidence-card {% if clue.discovered %}is-found{% endif %}" id="evidence-{{ clue.id }}"><div class="evidence-symbol">{% if clue.discovered %}✓{% else %}⌕{% endif %}</div><div><h3>{{ clue.name }}</h3><p>{{ clue.description }}</p><div class="clue-detail" id="detail-{{ clue.id }}">{% if clue.discovered %}{{ clue.detail }}{% else %}Details are concealed until examined.{% endif %}</div><button class="text-button examine-btn" data-clue="{{ clue.id }}" {% if clue.discovered %}disabled{% endif %}>{% if clue.discovered %}Examined ✓{% else %}Examine evidence ↗{% endif %}</button></div></article>{% endfor %}</div>
+    </section>
+    <section class="panel"><div class="panel-title"><div><div class="panel-kicker">02 / PERSONS OF INTEREST</div><h2>Suspect profiles</h2></div></div>
+      <div class="suspect-grid">{% for suspect in case.suspects %}<article class="suspect-card"><div class="suspect-avatar">{{ suspect.name[:1] }}</div><h3>{{ suspect.name }}</h3><p>{{ suspect.background }}</p><div class="suspect-fact"><span>MOTIVE</span>{{ suspect.motive }}</div><div class="suspect-fact"><span>ALIBI</span>{{ suspect.alibi }}</div><details><summary>Read statement</summary><p class="statement">{{ suspect.statement }}</p></details></article>{% endfor %}</div>
+    </section>
+    <section class="panel puzzle-panel"><div class="panel-title"><div><div class="panel-kicker">03 / LOGIC CHALLENGE</div><h2>Detective's puzzle</h2></div><span class="points-tag">+20 POINTS</span></div>
+      {% for puzzle in case.puzzles %}<div class="puzzle-question"><p>{{ puzzle.question }}</p><div class="answer-row"><input id="answer-{{ puzzle.id }}" type="text" placeholder="Type your deduction..." autocomplete="off"><button class="btn btn-primary puzzle-submit" data-puzzle="{{ puzzle.id }}">Submit answer</button></div><div class="inline-feedback" id="puzzle-feedback-{{ puzzle.id }}"></div></div>{% endfor %}
+    </section>
+    <section class="panel accusation-panel"><div class="panel-title"><div><div class="panel-kicker">04 / FINAL DEDUCTION</div><h2>Who is responsible?</h2></div></div><p>Review the facts carefully. A correct accusation earns 100 points; an incorrect accusation costs 20.</p><div class="accuse-row"><select id="suspect-choice"><option value="">Select a suspect...</option>{% for suspect in case.suspects %}<option value="{{ suspect.id }}">{{ suspect.name }}</option>{% endfor %}</select><button class="btn btn-danger" id="accuse-btn">Submit accusation</button></div><div id="accusation-result" class="result-box" hidden></div></section>
+  </div>
+  <aside class="side-column">
+    <section class="panel hint-panel"><div class="panel-kicker">NEED A NUDGE?</div><div class="side-icon">✧</div><h3>Detective's intuition</h3><p>Ask for a progressive hint. Each hint costs 10 points.</p><button class="btn btn-outline btn-wide" id="hint-btn">Reveal a hint −10 pts</button><div id="hint-output" class="hint-output" aria-live="polite"></div></section>
+    <section class="panel assistant-panel"><div class="panel-kicker">YOUR AI PARTNER</div><h3>Detective assistant</h3><p>Ask about the case, clues, or investigation strategy.</p><div class="chat-window" id="chat-window"><div class="chat-message assistant">I'm on the case with you. What would you like to examine?</div></div><form id="chat-form" class="chat-form"><input id="chat-input" maxlength="500" placeholder="Ask the detective assistant..." required><button type="submit" aria-label="Send message">↑</button></form><small class="chat-note">The assistant will not reveal the culprit before the case ends.</small></section>
+    <section class="panel checklist-panel"><div class="panel-kicker">FIELD CHECKLIST</div><div class="check-row"><span>◈</span> Examine all evidence <b id="check-clues">{{ game.discovered|length }}/{{ case.evidence|length }}</b></div><div class="check-row"><span>▧</span> Solve the puzzle <b id="check-puzzles">{{ game.completed_puzzles|length }}/{{ case.puzzles|length }}</b></div><div class="check-row"><span>✧</span> Use your reasoning <b>∞</b></div><a href="{{ url_for('dashboard') }}" class="text-button">← Leave investigation</a></section>
+  </aside>
+</div>
+<script>window.GAME_CONFIG = {caseEnded: {{ 'true' if game.ended else 'false' }}};</script>
+{% endblock %}

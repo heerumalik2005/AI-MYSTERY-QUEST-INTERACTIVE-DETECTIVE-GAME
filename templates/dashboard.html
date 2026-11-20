@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | AI Mystery Quest{% endblock %}
+{% block content %}
+<section class="page-heading"><div><div class="eyebrow">DETECTIVE COMMAND CENTER</div><h1>Welcome back, <em>Detective.</em></h1><p>Choose your next investigation or review your record.</p></div><div class="heading-mark">✦</div></section>
+<section class="stats-grid">
+  <div class="stat-card"><span>TOTAL SCORE</span><strong>{{ total_score }}</strong><small>Across completed cases</small></div>
+  <div class="stat-card"><span>CASES SOLVED</span><strong>{{ solved }}</strong><small>Saved investigations</small></div>
+  <div class="stat-card"><span>CASE DATABASE</span><strong>02+</strong><small>Stories ready to investigate</small></div>
+</section>
+<section class="dashboard-grid">
+  <div class="panel new-case-panel"><div class="panel-kicker">NEW INVESTIGATION / 001</div><div class="big-icon">⌕</div><h2>A new mystery awaits.</h2><p>Open a fresh case file. Every investigation has suspects, evidence, a puzzle, and one logically supported answer.</p>
+    <form action="{{ url_for('new_game') }}" method="post"><button class="btn btn-primary btn-wide" type="submit">Open a case file <span>↗</span></button></form>
+    <div class="panel-foot"><span class="live-dot"></span> {% if demo_mode %}Offline case engine ready{% else %}Groq AI case generation available{% endif %}</div>
+  </div>
+  <div class="panel recent-panel"><div class="panel-title"><div><div class="panel-kicker">YOUR RECORD</div><h2>Recent cases</h2></div><a href="{{ url_for('history') }}">View all ↗</a></div>
+    {% if history %}{% for item in history %}<div class="history-row"><div class="history-icon">◈</div><div class="history-info"><b>{{ item.case_title }}</b><small>{{ item.solved_at[:10] }} · {{ item.clues_found }} clues</small></div><strong class="{% if item.correct %}positive{% else %}negative{% endif %}">{{ item.score }} pts</strong></div>{% endfor %}
+    {% else %}<div class="empty-state"><span>⌁</span><b>No completed cases yet</b><small>Your investigation record will appear here.</small></div>{% endif %}
+  </div>
+</section>
+{% endblock %}

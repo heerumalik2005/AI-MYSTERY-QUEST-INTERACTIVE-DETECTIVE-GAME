@@ -1,0 +1,152 @@
+[
+  {
+    "id": "demo-clocktower",
+    "title": "The Clocktower Secret",
+    "description": "At 9:15 PM, renowned horologist Elias Vane was found unconscious in the locked workshop of the old clocktower. A rare prototype escapement has vanished. The workshop door was locked from the inside, and the tower clock stopped at 8:40 PM.",
+    "location": "Northbridge Clocktower",
+    "difficulty": "Medium",
+    "suspects": [
+      {
+        "id": "mara",
+        "name": "Mara Vane",
+        "background": "Elias's niece and apprentice; she knows the clocktower mechanisms.",
+        "motive": "She feared Elias would sell the family workshop.",
+        "alibi": "Claims she was serving tea downstairs from 8:30 to 9:00 PM.",
+        "statement": "I never entered the workshop tonight. Uncle was upset about the prototype, but I wanted to protect his work."
+      },
+      {
+        "id": "felix",
+        "name": "Felix Crowe",
+        "background": "A wealthy collector who had offered to buy the prototype.",
+        "motive": "The prototype would complete his private collection.",
+        "alibi": "Says he was on a phone call in the entrance hall until 8:55 PM.",
+        "statement": "I left the tower before nine. I had no reason to go near the workshop."
+      },
+      {
+        "id": "jonas",
+        "name": "Jonas Reed",
+        "background": "The tower caretaker with keys to the service passages.",
+        "motive": "Elias planned to report missing maintenance funds.",
+        "alibi": "Says he was repairing the bell mechanism on the roof.",
+        "statement": "The roof ladder was wet from rain. I stayed up there the whole time."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "brass-dust",
+        "name": "Brass dust on the service key",
+        "description": "Fine brass filings cling to the caretaker's service key. The prototype casing is made of a distinctive brass alloy.",
+        "detail": "The filings are fresh and match the alloy used in the missing prototype.",
+        "unlock": "start"
+      },
+      {
+        "id": "wet-boot",
+        "name": "A dry boot print",
+        "description": "A muddy boot print appears beside the inner workshop door, but its center is unexpectedly dry.",
+        "detail": "The print was made after the rain stopped, likely by someone who had come in through the covered service passage.",
+        "unlock": "puzzle"
+      },
+      {
+        "id": "roof-log",
+        "name": "Roof maintenance log",
+        "description": "The logbook says the roof bell mechanism was serviced at 7:50 PM, not during the incident.",
+        "detail": "The caretaker's claimed roof repair at 8:40 PM is contradicted by the signed log.",
+        "unlock": "suspect"
+      }
+    ],
+    "puzzles": [
+      {
+        "id": "timeline",
+        "question": "The clock stopped at 8:40 PM. The workshop camera recorded a shadow entering the service passage at 8:42 PM. The victim's tea was still warm at 9:15 PM. Which event most likely happened first?",
+        "accepted": [
+          "the clock stopped",
+          "clock stopped",
+          "8:40"
+        ],
+        "explanation": "The clock stopped at 8:40 PM, before the shadow entered the passage at 8:42 PM."
+      }
+    ],
+    "hints": [
+      "Compare each alibi with physical records rather than trusting the statements.",
+      "The roof maintenance log challenges one suspect's timeline.",
+      "Fresh brass filings on a key connect its holder to the missing prototype."
+    ],
+    "culprit_id": "jonas",
+    "solution": "Jonas Reed took the prototype through the service passage. Fresh brass filings on his key link him to it, and the signed roof log disproves his claimed alibi. He staged the locked-room mystery using the service passage."
+  },
+  {
+    "id": "demo-gallery",
+    "title": "Midnight at the Glass Gallery",
+    "description": "During a private exhibition, the Moonstone Pendant disappeared from a sealed display case. The alarm was disabled for exactly four minutes, from 11:56 PM to midnight. Curator Amara Vale discovered the theft at 12:08 AM.",
+    "location": "Bellweather Museum, Glass Gallery",
+    "difficulty": "Easy",
+    "suspects": [
+      {
+        "id": "nina",
+        "name": "Nina Sol",
+        "background": "A restoration artist who worked on the pendant's display mount.",
+        "motive": "She wanted to expose poor museum security.",
+        "alibi": "Claims she was in the conservation lab throughout the alarm outage.",
+        "statement": "I was restoring a frame. I never went near the pendant after the gallery closed."
+      },
+      {
+        "id": "oscar",
+        "name": "Oscar Blythe",
+        "background": "A visiting magician hired to entertain donors.",
+        "motive": "He has debts and could sell a jewel discreetly.",
+        "alibi": "Says he performed in the east hall from 11:50 PM to 12:05 AM.",
+        "statement": "Everyone saw me performing. I couldn't have been in two places."
+      },
+      {
+        "id": "theo",
+        "name": "Theo Marsh",
+        "background": "The museum's night technician responsible for alarm maintenance.",
+        "motive": "He was about to be dismissed for falsifying maintenance invoices.",
+        "alibi": "Claims he was in the basement control room resetting a circuit.",
+        "statement": "The outage was a routine glitch. I followed the standard reset procedure."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "fiber",
+        "name": "Blue silk fiber",
+        "description": "A short blue silk fiber is caught in the display-case hinge.",
+        "detail": "The fiber matches the lining of the technician's maintenance pouch.",
+        "unlock": "start"
+      },
+      {
+        "id": "alarm-report",
+        "name": "Alarm service report",
+        "description": "The system log shows a manual override using a technician-level code.",
+        "detail": "Only the night technician's credentials were used to disable the alarm.",
+        "unlock": "puzzle"
+      },
+      {
+        "id": "stage-photo",
+        "name": "Performance photograph",
+        "description": "A donor's photograph shows the magician on stage at 11:59 PM.",
+        "detail": "Oscar was visibly performing during the critical minute.",
+        "unlock": "suspect"
+      }
+    ],
+    "puzzles": [
+      {
+        "id": "code",
+        "question": "The alarm log records a manual override. Only staff with a technician-level code can issue it. Which role had the access needed to disable the alarm?",
+        "accepted": [
+          "technician",
+          "night technician",
+          "theo"
+        ],
+        "explanation": "The night technician had the required technician-level credentials."
+      }
+    ],
+    "hints": [
+      "Look for evidence that identifies who could operate the alarm system.",
+      "The performance photograph helps verify one suspect's alibi.",
+      "The silk fiber and access log both point toward the person responsible for maintenance."
+    ],
+    "culprit_id": "theo",
+    "solution": "Theo Marsh disabled the alarm with his technician credentials and removed the pendant. The blue silk fiber matches his maintenance pouch, and the access log proves that his credentials were used. Oscar's photograph confirms his alibi."
+  }
+]
